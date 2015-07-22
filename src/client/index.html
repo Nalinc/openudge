@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>        
+        <!-- META SECTION -->
+        <title>openudge</title>           
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- END META SECTION -->
+        
+        <!-- CSS INCLUDE -->        
+        <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+        <!-- EOF CSS INCLUDE -->                                    
+
+    </head>
+    <body>
+        <!-- START PAGE CONTAINER -->
+        <div class="page-container">
+            
+            <left-panel></left-panel> 
+
+            <!-- PAGE CONTENT -->
+            <div class="page-content">
+                
+                <header-pane></header-pane>  
+
+                <ui-view></ui-view>                              
+ 
+            </div>            
+            <!-- END PAGE CONTENT -->
+        </div>
+        <!-- END PAGE CONTAINER -->            
+
+
+        <script type="text/javascript" src="scripts/rconfig.js"></script>
+        <script type="text/javascript" src="bower_components/requirejs/require.js" data-main="scripts/main.js"></script>                
+        <!-- END TEMPLATE -->
+    <!-- END SCRIPTS -->         
+    </body>
+</html>
