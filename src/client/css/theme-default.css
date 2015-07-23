@@ -157,7 +157,8 @@ body {
   float: right;
   width: 300px;
   padding: 10px;
-  min-height: 100%;
+  height:480px !important;
+  overflow-y:auto;
   background: rgba(0, 0, 0, 0.02);
   border-left: 1px solid #DDD;
 }
@@ -1560,6 +1561,7 @@ a.list-group-item:focus {
 }
 .panel .panel-body.panel-body-search {
   padding: 5px;
+  height:90px;
 }
 .panel .panel-body.panel-body-half .panel-body {
   width: 50%;
@@ -2200,7 +2202,7 @@ input[type=checkbox] {
   width: auto;
 }
 .form-control {
-  height: 30px;
+  height: 80px;
   font-size: 12px;
   line-height: 18px;
   -moz-box-shadow: none;
@@ -2210,6 +2212,12 @@ input[type=checkbox] {
   border: 1px solid #D5D5D5;
   background: #F9F9F9;
 }
+
+.form-control#chatInput{
+  height:115%;
+  background-color:#F9F9F9;
+}
+
 .form-control:focus {
   border-color: #C5C5C5;
   -moz-box-shadow: none;
@@ -2240,7 +2248,14 @@ input[type=checkbox] {
 }
 .input-group-addon,
 .input-group-btn {
-  vertical-align: bottom;
+  vertical-align: top;
+}
+
+.input-group-btn .btn-send{
+  float:left;
+  width:100%;
+  padding:10px;
+  margin: 5px 5px 4px 1px;
 }
 .form-group:last-child {
   margin-bottom: 0px;
@@ -3732,6 +3747,8 @@ background: #1caf9a !important;
 .messages {
   width: 100%;
   float: left;
+  height:460px;
+  overflow-y:auto;
 }
 .messages .item {
   width: 100%;

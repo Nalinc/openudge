@@ -10,6 +10,7 @@ var require = {
         'angular-couch-potato':'../../../bower_components/angular-couch-potato/dist/angular-couch-potato',
         'icheck':'../scripts/plugins/icheck/icheck.min',
         'mCustomScrollbar':'../scripts/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min',
+        'events':'../scripts/events',
         'plugins':'../scripts/plugins/plugins',
         'actions':'../scripts/plugins/actions',
         'leftPanel':'../directives/leftPanel',
@@ -27,6 +28,7 @@ var require = {
         'icheck': { deps: ['jquery'] },
         'leftPanel': { deps: ['angular'] },
         'headerPane':{ deps: ['angular'] },
+        'events':{ deps: ['jquery'] }
     },
     priority: [
         'jquery',

@@ -5,6 +5,7 @@ define([
     'bootstrap',
     'jqueryui',
     'bootstrap',
+    'events',
  //   'icheck',
     'leftPanel',
     'headerPane'

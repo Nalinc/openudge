@@ -6,10 +6,7 @@ define([
 
 		var app = angular.module('app', ['scs.couch-potato', 'ui.router']);
 
-		app.config(function($stateProvider, $urlRouterProvider){
-
-			$urlRouterProvider.otherwise('/');
-
+		app.config(function($stateProvider){
 			$stateProvider
 	        	.state('home', {
 		            url: '/',
@@ -19,7 +16,6 @@ define([
 	        		url: '/messages',
 	        		templateUrl:"views/messages.tpl.html"
 	        	})
-	        	.state("otherwise", { url : '/'})
 
 		});
 
