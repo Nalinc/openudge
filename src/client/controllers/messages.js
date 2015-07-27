@@ -1,24 +1,70 @@
-define(['app'],function(app){
-	app.registerController('messageController',function($scope, $rootScope){
+define(['app','events'],function(app){
+	app.registerController('messageController',function($scope, $rootScope , chat){
 
-		var nickname = "John Doe"
-		var socket = io.connect('http://192.168.1.90:8080');
-		socket.emit('join',nickname);
+     	$rootScope.items=["home","messages"]
 
-		socket.on("AddMessage",function(data){
-				console.log("AddMessage: data.name= "+data.name+" data.msg= "+data.text)
+		$scope.messages = chat.messages;
+		$scope.contacts = chat.contacts;
+
+		$scope.current = 1;
+
+
+		$scope.loadChat =function(selected){
+			$scope.current = selected 
+		}					
+
+
+		$scope.submitMessage =function(){
+			var msg = {
+				"id":$scope.current,
+//				"type":($scope.current==0)?"echo":"normal",
+				"name":$rootScope.user.name,
+				"incoming":false,
+				"text":$scope.messageString,
+				"time":new Date().getHours()+":"+new Date().getMinutes()
+			}
+			$scope.messageString = "";
+			chat.messages[$scope.current].push(msg);
+			$rootScope.socket.emit("messageOut",msg);
+		}	
+
+		$rootScope.socket.on("AddMessage",function(data){
+				chat.messages[$scope.current].push(data)
+				$scope.$apply();
 			});
 
-		socket.on("addUser",function(data){
+		$rootScope.socket.on("addUser",function(data){
 				console.log("AddUser:  "+data+" joined the chat")
 		});
 
-		socket.on("addAllUsers",function(data){
+		$rootScope.socket.on("addAllUsers",function(data){
 			console.log(data);
 		});
 
+		$rootScope.socket.on("addAllMessage",function(data){
+				for(var i in data)
+				{
+					var list = $("<li>");
+					if(data[i].name !== null)
+					{
+						chat.messages[data[i].id].push(data[i])
+						$scope.$apply();
+					}
+					else
+					{
+//						console.log(data[i]);
+					}
 
-		socket.on("removeUser",function(Nick){
+///					list.append(chat);
+	//				$("#ChatPane").append(list);				
+				}
+	//			$('.emoticons').emoticonize();	
+	//			$('#ChatContainer').animate({"scrollTop": $('#ChatContainer')[0].scrollHeight}, "slow");					
+		});	
+
+
+
+		$rootScope.socket.on("removeUser",function(Nick){
 				var listItems = $("#UserPane li");
 				listItems.each(function(data) {
 				    if($(this).html() == Nick)
@@ -33,61 +79,7 @@ define(['app'],function(app){
 				// socket.emit("messageOut",{name:null,text:removalMsg});
 		});	
 
-		
-		$rootScope.user = {
-							"name":"John Doe",
-							"image":"../assets/images/users/avatar.jpg",
-							}
 
-		$scope.current = 1;
-
-
-		$scope.contacts = {
-							"0":{
-								"id":"0",
-								"name": "Echo Test",
-								"image":"../assets/images/users/no-image.jpg",
-								"description":"what goes around, comes around"	
-							},
-							"1":{
-								"id":"1",
-								"name": "Matt Hardy",
-								"image":"../assets/images/users/user.jpg",
-								"description":"This project is awesome"	
-							}};
-
-		$scope.messages = {
-							"0":[],
-							"1":[
-									{
-										"incoming":false,
-										"text":"Hello, how may I help you ?",
-										"time":"08:33",		
-									},
-									{
-										"incoming":true,
-										"text":"Hi, I need to know about products in kids category",
-										"time":"08:39",
-									}
-							]
-						}
-		$scope.loadChat =function(selected){
-			$scope.current = selected 
-		}					
-
-
-		$scope.submitMessage =function(){
-			var msg = {
-				"name":nickname,
-				"incoming":false,
-				"text":$scope.messageString,
-				"time":new Date().getHours()+":"+new Date().getMinutes()
-			}
-			$scope.messageString = "";
-			$scope.messages[$scope.current].push(msg);
-			socket.emit("messageOut",msg);
-
-		}	
 
 	});
 })

@@ -1,5 +1,5 @@
 define(['app'],function(app){
-	app.registerDirective('headerPane',function(){
+	app.registerDirective('headerPane',function($rootScope){
 		return{
 			restrict:'E',
 			templateUrl: "views/header.tpl.html",
@@ -9,7 +9,7 @@ define(['app'],function(app){
 				})
 			},
 			controller: function(){
-
+				$rootScope.items=["home"]
 			}
 
 		}

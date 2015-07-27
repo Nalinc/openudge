@@ -8,8 +8,8 @@ var http = require('http'),
 var messages = [];
 var users = [];
 
-var storeMessage = function(name, data){
-	messages.push({name:name,text:data});
+var storeMessage = function(data){
+	messages.push(data);
 	if(messages.length > 10){
 		messages.shift();
 	}
@@ -24,8 +24,11 @@ io.on('connection',function(client){
 //	client.emit('chat',{hello:'world'});
 
 	client.on('join',function(data){
+
 		client.name = data; //add a new property to client to identify it during deletion
-		storeMessage(null,"<span style='color:green; '>"+data+" Joined the chat </span>");
+
+		console.log(messages);
+		storeMessage({'name':null,'status':'joined'});
 
 		storeUsers(data);
 		console.log('user ' +data+' joined!');
@@ -38,15 +41,24 @@ io.on('connection',function(client){
 
 	client.on('messageOut',function(data){
 		console.log(data)
-		storeMessage(data.name,data.text);
-		client.broadcast.emit("AddMessage",data);
+		storeMessage(data);
+		if(data.id=="0")  //echo message
+		{
+			var obj = JSON.parse(JSON.stringify(data));
+			obj.incoming=true;
+
+			storeMessage(obj);			
+			client.emit("AddMessage",obj);
+		}	
+		//else..normal chat broadcast
 	});
 
 	client.on("disconnect",function(){
 		console.log("user "+client.name+" left..");
 	    var i = users.indexOf(client.name);
 	    users.splice(i, 1);
-   		storeMessage(null,"<span style='color:red;'>"+client.name+" Left the chat </span>");
+		storeMessage({'name':null,'status':'left'});
+
 
 	    client.broadcast.emit("removeUser",client.name);
 });

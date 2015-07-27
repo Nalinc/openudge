@@ -113,7 +113,7 @@
 
 <!-- START BREADCRUMB -->
 <ul class="breadcrumb">
-    <li><a href="#">Home</a></li>                    
+    <li ng-repeat="i in items"><a ui-sref={{i}}>{{i}}</a></li>                    
 </ul>
 <!-- END BREADCRUMB -->    
 
