@@ -1,8 +1,8 @@
 {
-  "name": "rdash-angular",
+  "name": "openudge",
   "version": "0.0.1",
-  "description": "An AngularJS implementation of the responsive dashboard",
-  "homepage": "https://github.com/Ehesp/Responsive-Dashboard",
+  "description": "Pluggable Chat Platform for Customer-support",
+  "homepage": "https://github.com/nalinc/openudge",
   "authors": [
     "Nalin Chhibber <nalin.chhibber@gmail.com>"
   ],
@@ -30,6 +30,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rdash/rdash-angular"
+    "url": "https://github.com/nalinc/openudge"
   }
 }

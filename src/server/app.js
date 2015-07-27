@@ -34,7 +34,6 @@ module.exports = function () {
 	
 	app.use(enableCORS);
 
-
 	//Static content
 	app.use(express.static(path.normalize(__dirname + '/../client'))); 
 	app.use('/bower_components',  express.static(__dirname + '/../../bower_components'));

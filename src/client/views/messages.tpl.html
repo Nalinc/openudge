@@ -15,17 +15,11 @@
     <div class="content-frame-right">
         
         <div class="list-group list-group-contacts border-bottom push-down-10">
-            <a href="#" class="list-group-item">                                 
+            <a href="#" class="list-group-item" ng-class="" ng-repeat="contact in contacts" ng-click="loadChat(contact.id)">                                 
                 <div class="list-group-status status-online"></div>
-                <img src="../assets/images/users/user.jpg" class="pull-left" alt="Dmitry Ivaniuk">
-                <span class="contacts-title">Dmitry Ivaniuk</span>
-                <p>Hello my friend, how are...</p>
-            </a>
-            <a href="#" class="list-group-item active">         
-                <div class="list-group-status status-online"></div>
-                <img src="../assets/images/users/user2.jpg" class="pull-left" alt="John Doe">
-                <div class="contacts-title">John Doe <span class="label label-danger">5</span></div>
-                <p>This project is awesome</p>                                       
+                <img ng-src={{contact.image}} class="pull-left" alt={{contact.name}}>
+                <span class="contacts-title">{{contact.name}}</span>
+                <p>{{contact.description}}</p>
             </a>
         </div>
            
@@ -36,19 +30,19 @@
     <div class="content-frame-body content-frame-body-left">
         
         <div class="messages messages-img">
-            <div class="item in">
+            <div class="item" ng-class="message.incoming?'in':''" ng-repeat="message in messages[current]">
                 <div class="image">
-                    <img src="../assets/images/users/user2.jpg" alt="John Doe">
+                    <img ng-src={{message.incoming?contacts[current].image:user.image}} alt="John Doe">
                 </div>
                 <div class="text">
                     <div class="heading">
-                        <a href="#">John Doe</a>
-                        <span class="date">08:33</span>
+                        <a href="#">{{message.incoming?contacts[current].name:user.name}}</a>
+                        <span class="date">{{message.time}}</span>
                     </div>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed facilisis suscipit eros vitae iaculis.
+                    {{message.text}}    
                 </div>
             </div>
-            <div class="item">
+<!--             <div class="item">
                 <div class="image">
                     <img src="../assets/images/users/user.jpg" alt="Dmitry Ivaniuk">
                 </div>                                
@@ -59,7 +53,7 @@
                     </div>                                    
                     Integer et ipsum vitae urna mattis dictum. Sed eu sollicitudin nibh, in luctus velit.
                 </div>
-            </div>
+            </div> -->
         </div>                        
         
         <div class="panel panel-default push-up-10">
@@ -68,13 +62,13 @@
                     <div class="input-group-btn">
                         <button class="btn btn-default"><span class="fa fa-camera"></span></button>
                         <button class="btn btn-default"><span class="fa fa-chain"></span></button>
-                        <button class="btn btn-default btn-send" id="submit" >Send</button>
+                        <button class="btn btn-default btn-send" id="submit" ng-click="submitMessage()">Send</button>
                     </div>
                     <div class="input-group-btn">
                         
                     </div>
                    
-                    <textarea id="chatInput" class="form-control" placeholder="Your message..."></textarea> 
+                    <textarea id="chatInput" ng-model="messageString" class="form-control" placeholder="Your message..."></textarea> 
 
                 </div>
             </div>

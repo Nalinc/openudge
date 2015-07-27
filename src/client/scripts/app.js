@@ -6,7 +6,7 @@ define([
 
 		var app = angular.module('app', ['scs.couch-potato', 'ui.router']);
 
-		app.config(function($stateProvider, $urlRouterProvider){
+		app.config(function($stateProvider, $urlRouterProvider, $couchPotatoProvider){
 
 			$urlRouterProvider.otherwise('/');
 
@@ -17,7 +17,13 @@ define([
 	        	})
 	        	.state('messages',{
 	        		url: '/messages',
-	        		templateUrl:"views/messages.tpl.html"
+	        		templateUrl:"views/messages.tpl.html",
+	        		controller:"messageController",
+	        		resolve: {
+                        deps: $couchPotatoProvider.resolveDependencies([
+                            '../controllers/messages'
+                        ])
+                    }
 	        	})
 	        	.state("otherwise", { url : '/'})
 

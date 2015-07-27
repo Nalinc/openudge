@@ -37,6 +37,7 @@ io.on('connection',function(client){
 	});
 
 	client.on('messageOut',function(data){
+		console.log(data)
 		storeMessage(data.name,data.text);
 		client.broadcast.emit("AddMessage",data);
 	});
