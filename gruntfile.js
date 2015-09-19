@@ -1,5 +1,15 @@
+var pkg = require('./package.json');
+
+var client = pkg.micro.client;
+var server = pkg.micro.server;
+var dist = pkg.micro.dist;
+var source = pkg.micro.source;
+
+var distclient = dist + "client/";
+var distserver = dist + "server/";
 var srcclient = source + "client/";
 var srcserver = source + "server/";
+var serverport = process.env.PORT || 8080;
 
 module.exports = function(grunt) {
 
@@ -40,6 +50,8 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-express-server');
 
   grunt.registerTask('build', [
     'bower:install' 
@@ -49,13 +61,26 @@ module.exports = function(grunt) {
       if (target === 'dev') {
           return grunt.task.run([ 
               'build', 
-              'express:dev'
+              'express:dev',
+              'express-keepalive:dev'
           ]);
       }
       return grunt.task.run([
              'build',
-             'express:prod'
+             'express:prod',
+             'express-keepalive:prod'
            ]);
+    });
+
+    grunt.registerTask('express-keepalive', 'Keep grunt running', function(target) {
+        var message = 'Openudge is running on http://localhost:' + serverport; 
+        if (target == "dev") {
+            message += " in development mode";
+        } else {
+            message += " in production mode";
+        }
+        console.log(message);
+        this.async();       
     });
 
   grunt.registerTask('default', [ 

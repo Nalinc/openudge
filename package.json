@@ -1,16 +1,26 @@
 {
-    "name": "openudge",
-    "version": "0.0.1",
-    "author": "Nalin Chhibber",
-    "contributors": [
-        "Nalin Chhibber <nalin.chhibber@gmail.com>"
-    ],
-    "devDependencies": {
-        "bower": "^1.3.9",
-        "express": "^4.10.4",
-        "body-parser": "^1.12.2",
-        "grunt": "^0.4.5",
-        "grunt-contrib-jshint": "^0.6.0",
-        "socket.io": "^1.3.3"
-    }
+  "name": "openudge",
+  "micro": {
+    "client": "client/",
+    "server": "server/",
+    "dist": "dist/",
+    "source": "src/"
+  },
+  "version": "0.0.1",
+  "author": "Nalin Chhibber",
+  "contributors": [
+    "Nalin Chhibber <nalin.chhibber@gmail.com>"
+  ],
+  "devDependencies": {
+    "bower": "^1.3.9",
+    "express": "^4.10.4",
+    "body-parser": "^1.12.2",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.6.0",
+    "socket.io": "^1.3.3"
+  },
+  "dependencies": {
+    "grunt-bower-task": "^0.4.0",
+    "grunt-express-server": "^0.5.1"
+  }
 }
